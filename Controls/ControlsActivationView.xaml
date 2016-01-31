@@ -1,0 +1,134 @@
+<UserControl x:Class="LoRaMoteConfig.Controls.ActivationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ValidationTypes="clr-namespace:LoRaMoteConfig.ValidationTypes"
+             xmlns:TypeConverters="clr-namespace:LoRaMoteConfig.TypeConverters"
+             xmlns:mdt="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
+             FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+             Height="610" Width="580">
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.CheckBox.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ListBox.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.RadioButton.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml"/>
+      </ResourceDictionary.MergedDictionaries>
+      <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+      <TypeConverters:NotBooleanToVisibilityConverter x:Key="NotBooleanToVisibilityConverter"/>
+      <TypeConverters:NotBooleanConverter x:Key="NotBooleanConverter"/>
+      <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignTextBox}"/>
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <StackPanel Margin="3">
+    <StackPanel Orientation="Horizontal" Margin="3">
+      <Label Content="Activation" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3"
+             MinWidth="130"/>
+      <StackPanel Orientation="Horizontal">
+        <RadioButton Checked="rBtnActivation_Checked" Name="rBtnOta" Content="Over the Air" Margin="3" IsChecked="True"/>
+        <RadioButton Checked="rBtnActivation_Checked" Name="rBtnPa" Content="Personalization" Margin="3"/>
+      </StackPanel>
+    </StackPanel>
+    <StackPanel Name="pnlOta" Orientation="Vertical" Margin="3" VerticalAlignment="Center"
+                IsEnabled="{Binding ElementName=rBtnOta, Path=IsChecked}">
+      <StackPanel Orientation="Horizontal">
+        <Label Content="AppEui [HEX]" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3"
+               MinWidth="130"/>
+        <TextBox LostFocus="tBox_LostFocus" GotFocus="tBox_GotFocus" Validation.Error="tBox_Error"
+                 Binding.TargetUpdated="tBox_BindingTargetUpdated" Binding.SourceUpdated="tBox_BindingSourceUpdated"
+                 Name="tBoxAppEui" HorizontalContentAlignment="Left"
+                 VerticalContentAlignment="Center" MinWidth="140" Margin="3" HorizontalAlignment="Center"
+                 VerticalAlignment="Center">
+          <TextBox.Text>
+            <Binding Path="Name" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="true"
+                     NotifyOnSourceUpdated="true" NotifyOnTargetUpdated="true">
+              <Binding.ValidationRules>
+                <ValidationTypes:EuiKeyValidationRule Digits="16" ValidatesOnTargetUpdated="true"/>
+              </Binding.ValidationRules>
+            </Binding>
+          </TextBox.Text>
+        </TextBox>
+      </StackPanel>
+      <StackPanel Orientation="Horizontal">
+        <Label Content="AppKey [HEX]" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3"
+               MinWidth="130"/>
+        <TextBox LostFocus="tBox_LostFocus" GotFocus="tBox_GotFocus" Validation.Error="tBox_Error"
+                 Binding.TargetUpdated="tBox_BindingTargetUpdated" Binding.SourceUpdated="tBox_BindingSourceUpdated"
+                 Name="tBoxAppKey"
+                 HorizontalContentAlignment="Left" VerticalContentAlignment="Center" MinWidth="280" Margin="3"
+                 HorizontalAlignment="Center" VerticalAlignment="Center"
+                 IsReadOnly="{Binding ElementName=cboxAutoAppKey, Path=IsChecked}">
+          <TextBox.Text>
+            <Binding Path="Name" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="true"
+                     NotifyOnSourceUpdated="true" NotifyOnTargetUpdated="true">
+              <Binding.ValidationRules>
+                <ValidationTypes:EuiKeyValidationRule Digits="32" ValidatesOnTargetUpdated="true"/>
+              </Binding.ValidationRules>
+            </Binding>
+          </TextBox.Text>
+        </TextBox>
+        <CheckBox Name="cboxAutoAppKey" IsChecked="True" Content="Auto" Margin="3" VerticalAlignment="Center"/>
+      </StackPanel>
+    </StackPanel>
+    <StackPanel Name="pnlPa" Orientation="Vertical" Margin="3"
+                IsEnabled="{Binding ElementName=rBtnPa, Path=IsChecked}">
+      <StackPanel Orientation="Horizontal">
+        <Label Content="Device address [HEX]:" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3"
+               MinWidth="130"/>
+        <TextBox LostFocus="tBox_LostFocus" GotFocus="tBox_GotFocus" Validation.Error="tBox_Error"
+                 Binding.TargetUpdated="tBox_BindingTargetUpdated" Binding.SourceUpdated="tBox_BindingSourceUpdated"
+                 Name="tBoxDevAddr" HorizontalContentAlignment="Left"
+                 VerticalContentAlignment="Center" MinWidth="70" Margin="3" HorizontalAlignment="Center"
+                 VerticalAlignment="Center">
+          <TextBox.Text>
+            <Binding Path="Name" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="true"
+                     NotifyOnSourceUpdated="true" NotifyOnTargetUpdated="true">
+              <Binding.ValidationRules>
+                <ValidationTypes:EuiKeyValidationRule Digits="8" ValidatesOnTargetUpdated="true"/>
+              </Binding.ValidationRules>
+            </Binding>
+          </TextBox.Text>
+        </TextBox>
+      </StackPanel>
+      <StackPanel Orientation="Horizontal">
+        <Label Content="NwkSKey [HEX]:" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3"
+               MinWidth="130"/>
+        <TextBox LostFocus="tBox_LostFocus" GotFocus="tBox_GotFocus" Validation.Error="tBox_Error"
+                 Binding.TargetUpdated="tBox_BindingTargetUpdated" Binding.SourceUpdated="tBox_BindingSourceUpdated"
+                 Name="tBoxNwkSKey"
+                 HorizontalContentAlignment="Left" VerticalContentAlignment="Center" MinWidth="280" Margin="3"
+                 HorizontalAlignment="Center" VerticalAlignment="Center">
+          <TextBox.Text>
+            <Binding Path="Name" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="true"
+                     NotifyOnSourceUpdated="true" NotifyOnTargetUpdated="true">
+              <Binding.ValidationRules>
+                <ValidationTypes:EuiKeyValidationRule Digits="32" ValidatesOnTargetUpdated="true"/>
+              </Binding.ValidationRules>
+            </Binding>
+          </TextBox.Text>
+        </TextBox>
+      </StackPanel>
+      <StackPanel Orientation="Horizontal">
+        <Label Content="AppSKey [HEX]:" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3"
+               MinWidth="130"/>
+        <TextBox LostFocus="tBox_LostFocus" GotFocus="tBox_GotFocus" Validation.Error="tBox_Error"
+                 Binding.TargetUpdated="tBox_BindingTargetUpdated" Binding.SourceUpdated="tBox_BindingSourceUpdated"
+                 Name="tBoxAppSKey"
+                 HorizontalContentAlignment="Left" VerticalContentAlignment="Center" MinWidth="280" Margin="3"
+                 HorizontalAlignment="Center" VerticalAlignment="Center">
+          <TextBox.Text>
+            <Binding Path="Name" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="true"
+                     NotifyOnSourceUpdated="true" NotifyOnTargetUpdated="true">
+              <Binding.ValidationRules>
+                <ValidationTypes:EuiKeyValidationRule Digits="32" ValidatesOnTargetUpdated="true"/>
+              </Binding.ValidationRules>
+            </Binding>
+          </TextBox.Text>
+        </TextBox>
+      </StackPanel>
+    </StackPanel>
+  </StackPanel>
+</UserControl>

@@ -1,0 +1,53 @@
+<UserControl x:Class="LoRaMoteConfig.Controls.AppRadioCoverageTesterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:extToolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended"
+             xmlns:ValidationTypes="clr-namespace:LoRaMoteConfig.ValidationTypes"
+             Height="Auto" Width="Auto">
+  <StackPanel>
+    <StackPanel Orientation="Horizontal">
+      <Label Content="ID:" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" MinWidth="140"/>
+      <TextBox LostFocus="tBox_LostFocus" GotFocus="tBox_GotFocus" Validation.Error="tBox_Error"
+               Binding.TargetUpdated="tBox_BindingTargetUpdated" Binding.SourceUpdated="tBox_BindingSourceUpdated"
+               Name="tBoxId" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MinWidth="100"
+               Margin="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBox.Text>
+          <Binding Path="Name" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="true"
+                   NotifyOnSourceUpdated="true" NotifyOnTargetUpdated="true">
+            <Binding.ValidationRules>
+              <ValidationTypes:NumericValidationRule Min="0" Max="255" Default="0" ValidatesOnTargetUpdated="true"/>
+            </Binding.ValidationRules>
+          </Binding>
+        </TextBox.Text>
+      </TextBox>
+    </StackPanel>
+    <StackPanel Orientation="Horizontal">
+      <Label Content="Number of packets:" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3"
+             MinWidth="140"/>
+      <TextBox LostFocus="tBox_LostFocus" GotFocus="tBox_GotFocus" Validation.Error="tBox_Error"
+               Binding.TargetUpdated="tBox_BindingTargetUpdated" Binding.SourceUpdated="tBox_BindingSourceUpdated"
+               Name="tBoxNbPackets" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+               MinWidth="100" Margin="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBox.Text>
+          <Binding Path="Name" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="true"
+                   NotifyOnSourceUpdated="true" NotifyOnTargetUpdated="true">
+            <Binding.ValidationRules>
+              <ValidationTypes:NumericValidationRule Min="0" Max="255" Default="1" ValidatesOnTargetUpdated="true"/>
+            </Binding.ValidationRules>
+          </Binding>
+        </TextBox.Text>
+      </TextBox>
+    </StackPanel>
+    <StackPanel Orientation="Horizontal" Margin="3">
+      <Label Content="Downlink test:" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3"
+             MinWidth="140"/>
+      <StackPanel Orientation="Horizontal">
+        <RadioButton Checked="rBtnrBtnDownlinkTestOn_Checked" Name="rBtnDownlinkTestOn" Content="ON" Margin="3"/>
+        <RadioButton Checked="rBtnrBtnDownlinkTestOff_Checked" Name="rBtnDownlinkTestOff" Content="OFF" Margin="3"
+                     IsChecked="True"/>
+      </StackPanel>
+    </StackPanel>
+  </StackPanel>
+</UserControl>

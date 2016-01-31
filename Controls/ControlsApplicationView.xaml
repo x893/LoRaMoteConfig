@@ -1,0 +1,45 @@
+<UserControl x:Class="LoRaMoteConfig.Controls.ApplicationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:s="clr-namespace:System;assembly=mscorlib"
+             xmlns:local.ValidationTypes="clr-namespace:LoRaMoteConfig.ValidationTypes"
+             xmlns:local.TypeConverters="clr-namespace:LoRaMoteConfig.TypeConverters"
+             xmlns:local.Controls="clr-namespace:LoRaMoteConfig.Controls"
+             xmlns:local.Enums="clr-namespace:LoRaMoteConfig.Enums"
+             xmlns:mdt="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
+             FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+             Height="610" Width="580">
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.CheckBox.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ListBox.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.RadioButton.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml"/>
+      </ResourceDictionary.MergedDictionaries>
+      <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+      <local.TypeConverters:NotBooleanToVisibilityConverter x:Key="NotBooleanToVisibilityConverter"/>
+      <local.TypeConverters:NotBooleanConverter x:Key="NotBooleanConverter"/>
+      <ObjectDataProvider x:Key="AppModes" MethodName="GetValues" ObjectType="{x:Type s:Enum}">
+        <ObjectDataProvider.MethodParameters>
+          <x:Type TypeName="local.Enums:AppModes"/>
+        </ObjectDataProvider.MethodParameters>
+      </ObjectDataProvider>
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <StackPanel Margin="3">
+    <StackPanel Orientation="Horizontal">
+      <Label Content="Application mode:" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3"
+             MinWidth="140"/>
+      <ComboBox SelectionChanged="cBoxAppMode_SelectionChanged" Name="cBoxAppMode" MinWidth="145" SelectedIndex="0"
+                Margin="3" ItemsSource="{Binding Source={StaticResource AppModes}}"/>
+    </StackPanel>
+    <StackPanel>
+      <local.Controls:AppGpsTrackingDemoView x:Name="appGpsTrackingDemoView"/>
+      <local.Controls:AppRadioCoverageTesterView x:Name="appRadioCoverageTesterView" Visibility="Collapsed"/>
+    </StackPanel>
+  </StackPanel>
+</UserControl>

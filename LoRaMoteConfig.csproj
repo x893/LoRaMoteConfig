@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: C:\Tools\Semtech\LoRaMoteConfig\LoRaMoteConfig.exe-->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EF3C9465-96EA-4454-B5DB-D6E20972E6D3}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>LoRaMoteConfig</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <ApplicationVersion>1.1.1.0</ApplicationVersion>
+    <FileAlignment>512</FileAlignment>
+    <RootNamespace>LoRaMoteConfig</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dragablz">
+      <HintPath>lib\Dragablz.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignColors">
+      <HintPath>lib\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf">
+      <HintPath>lib\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="MahApps.Metro">
+      <HintPath>lib\MahApps.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Management" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="WPFToolkit.Extended">
+      <HintPath>lib\WPFToolkit.Extended.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\AppRadioCoverageTesterView.xaml.cs">
+      <DependentUpon>AppRadioCoverageTesterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ControlsActivationView.xaml.cs">
+      <DependentUpon>ControlsActivationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ControlsAppGpsTrackingDemoView.xaml.cs">
+      <DependentUpon>ControlsAppGpsTrackingDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ControlsApplicationView.xaml.cs">
+      <DependentUpon>ControlsApplicationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ControlsChannelsView.xaml.cs">
+      <DependentUpon>ControlsChannelsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ControlsChannelView.xaml.cs">
+      <DependentUpon>ControlsChannelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ControlsMacLayerView.xaml.cs">
+      <DependentUpon>ControlsMacLayerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ControlsSerialPortView.xaml.cs">
+      <DependentUpon>ControlsSerialPortView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ControlProtocol.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="SerialPortEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ValidationTypes\NumericValidationRule.cs" />
+    <Compile Include="ValidationTypes\MaskValidationRule.cs" />
+    <Compile Include="ValidationTypes\EuiKeyValidationRule.cs" />
+    <Compile Include="TypeConverters\NotBooleanConverter.cs" />
+    <Compile Include="TypeConverters\NotBooleanToVisibilityConverter.cs" />
+    <Compile Include="TypeConverters\EnumDisplayNameAttribute.cs" />
+    <Compile Include="TypeConverters\EnumMapper.cs" />
+    <Compile Include="TypeConverters\EnumTypeConverter.cs" />
+    <Compile Include="General\DpiDecorator.cs" />
+    <Compile Include="General\LightenColorExtension.cs" />
+    <Compile Include="General\LightenColorMarkupExtension.cs" />
+    <Compile Include="General\Utilities.cs" />
+    <Compile Include="Events\DevicePhyEventArg.cs" />
+    <Compile Include="Events\DevicePhyEventHandler.cs" />
+    <Compile Include="Events\ByteArrayEventArg.cs" />
+    <Compile Include="Events\ByteArrayEventHandler.cs" />
+    <Compile Include="Events\StringEventArg.cs" />
+    <Compile Include="Events\StringEventHandler.cs" />
+    <Compile Include="Events\ErrorEventArgs.cs" />
+    <Compile Include="Events\ErrorEventHandler.cs" />
+    <Compile Include="Data\PropertiesViewModel.cs" />
+    <Compile Include="Data\Activation.cs" />
+    <Compile Include="Data\ActivationOta.cs" />
+    <Compile Include="Data\ActivationPa.cs" />
+    <Compile Include="Data\AppGpsTrackingDemoParam.cs" />
+    <Compile Include="Data\AppRadioCoverageTesterParam.cs" />
+    <Compile Include="Data\AppSettings.cs" />
+    <Compile Include="Data\ChannelParams.cs" />
+    <Compile Include="Data\AppSensorsGpsDemoParam.cs" />
+    <Compile Include="Data\DrRange.cs" />
+    <Compile Include="Data\Header.cs" />
+    <Compile Include="Data\Mac.cs" />
+    <Compile Include="Data\Params.cs" />
+    <Compile Include="Data\Rx2ChannelParams.cs" />
+    <Compile Include="Controls\Led.cs" />
+    <Compile Include="SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ChannelEditorWnd.xaml.cs">
+      <DependentUpon>ChannelEditorWnd.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWnd.xaml.cs">
+      <DependentUpon>MainWnd.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ConfigView.xaml.cs">
+      <DependentUpon>ConfigView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\aboutlogo.png" />
+    <Resource Include="images\help.png" />
+    <Resource Include="images\lora.ico" />
+    <Resource Include="images\lora.png" />
+    <Resource Include="images\semtech.ico" />
+    <Resource Include="lora.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ChannelEditorWnd.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ConfigView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\AppRadioCoverageTesterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ControlsActivationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ControlsAppGpsTrackingDemoView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ControlsApplicationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ControlsChannelsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ControlsChannelView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ControlsMacLayerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ControlsSerialPortView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWnd.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\deviceviewdic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\groupedelementsdic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\registerrwdic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

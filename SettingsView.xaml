@@ -1,0 +1,103 @@
+<UserControl x:Class="LoRaMoteConfig.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mdt="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
+             xmlns:LoRaMoteConfig="clr-namespace:LoRaMoteConfig"
+             xmlns:Controls="clr-namespace:LoRaMoteConfig.Controls"
+             Height="600" Width="600">
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBox.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.CheckBox.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ListBox.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.RadioButton.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml"/>
+      </ResourceDictionary.MergedDictionaries>
+      <XmlDataProvider x:Key="aboutProvider" XPath="ApplicationInfo" IsAsynchronous="false" IsInitialLoadEnabled="true">
+        <x:XData>
+          <ApplicationInfo xmlns="">
+                        <Link Uri="http://iot.semtech.com">More Info</Link>
+                        <UsersGuide Uri="http://iot.semtech.com/resources/LoRaMote_End-device_Test_Application">User's guide</UsersGuide>
+                    </ApplicationInfo>
+        </x:XData>
+      </XmlDataProvider>
+      <Image x:Key="aboutLogo" Source="./Images/LoRa.png"/>
+      <Style x:Key="DisplayAreaStyle" TargetType="{x:Type StackPanel}">
+        <Setter Property="FrameworkElement.Margin" Value="10,10,10,5"/>
+      </Style>
+      <Style TargetType="{x:Type Label}">
+        <Setter Property="Control.Padding" Value="0"/>
+      </Style>
+      <Style x:Key="ParagraphSeparator" TargetType="{x:Type Label}">
+        <Setter Property="Control.Padding" Value="0,10,0,0"/>
+      </Style>
+      <Style x:Key="LinkLabelStyle">
+        <Setter Property="Control.Padding" Value="0"/>
+        <Setter Property="FrameworkElement.VerticalAlignment" Value="Center"/>
+      </Style>
+      <Style x:Key="ReadOnlyDescStyle" BasedOn="{StaticResource MaterialDesignTextBox}"
+             TargetType="{x:Type TextBox}">
+        <Setter Property="TextBox.MinLines" Value="6"/>
+        <Setter Property="TextBox.MaxLines" Value="6"/>
+        <Setter Property="TextBoxBase.IsReadOnly" Value="true"/>
+        <Setter Property="TextBox.TextWrapping" Value="Wrap"/>
+        <Setter Property="TextBoxBase.VerticalScrollBarVisibility" Value="Visible"/>
+      </Style>
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <DockPanel LastChildFill="true">
+    <DockPanel Dock="Bottom" Margin="3">
+      <TextBlock DockPanel.Dock="Top" FontSize="24" FontWeight="Bold">About</TextBlock>
+      <Image DockPanel.Dock="Left" Source="./Images/LoRa.png" Width="115" Height="86"/>
+      <StackPanel DockPanel.Dock="Right" x:Uid="clientArea">
+        <StackPanel x:Uid="displayArea"
+                    DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Mode=OneTime}">
+          <Label x:Name="productName" x:Uid="productName" Content="{Binding Mode=OneTime, Path=Product}"/>
+          <StackPanel x:Uid="versionArea" Orientation="Horizontal">
+            <Label x:Name="versionLabel" x:Uid="VersionLabel" Content="Version - "/>
+            <Label x:Name="version" x:Uid="version" Content="{Binding Mode=OneTime, Path=Version}"/>
+          </StackPanel>
+          <StackPanel x:Uid="deviceConfigVersionArea" Orientation="Horizontal">
+            <Label x:Name="deviceConfigVersionLabel" x:Uid="DeviceConfigVersionLabel"
+                   Content="Device config version - "/>
+            <Label x:Name="deviceConfigVersion" x:Uid="deviceConfigVersion"
+                   Content="{Binding Mode=OneTime, Path=DeviceConfigVersion}"/>
+          </StackPanel>
+          <StackPanel x:Uid="firmwareVersionArea" Orientation="Horizontal">
+            <Label x:Name="firmwareVersionLabel" x:Uid="FirmwareVersionLabel" Content="Firmware version - "/>
+            <Label Content="{Binding FirmwareVersion}"/>
+          </StackPanel>
+          <Label x:Name="copyright" x:Uid="copyright" Content="{Binding Mode=OneTime, Path=Copyright}"/>
+          <Label x:Name="company" x:Uid="company" Content="{Binding Mode=OneTime, Path=Company}"/>
+          <Label x:Name="reserved" x:Uid="reserved" Content="All Rights Reserved."/>
+          <Label x:Name="info" x:Uid="info" Style="{StaticResource ParagraphSeparator}" Content="Product details:"/>
+          <TextBox x:Name="description" x:Uid="description" Style="{StaticResource ReadOnlyDescStyle}"
+                   Text="{Binding Mode=OneTime, Path=Description}"/>
+          <DockPanel Dock="Bottom" x:Uid="buttonArea">
+            <Label x:Name="productLink" x:Uid="productLink" Style="{StaticResource LinkLabelStyle}">
+              <Hyperlink RequestNavigate="hyperlink_RequestNavigate" x:Name="hyperlink" x:Uid="hyperlink"
+                         Style="{StaticResource LinkLabelStyle}" NavigateUri="{Binding Mode=OneTime, Path=LinkUri}">
+                <TextBlock Text="{Binding Mode=OneTime, Path=LinkText}"/>
+              </Hyperlink>
+            </Label>
+          </DockPanel>
+        </StackPanel>
+      </StackPanel>
+    </DockPanel>
+    <ListBox Margin="3" x:Uid="listBoxArea"
+             DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Mode=OneTime}">
+      <ListBoxItem>
+        <Label x:Name="usersGuideLink1" x:Uid="usersGuideLink1" Style="{StaticResource LinkLabelStyle}">
+          <Hyperlink RequestNavigate="hyperlink_RequestNavigate" x:Name="hyperlink1" x:Uid="hyperlink1"
+                     Style="{StaticResource LinkLabelStyle}" NavigateUri="{Binding Mode=OneTime, Path=UsersGuideUri}">
+            <TextBlock FontSize="24" Text="{Binding Mode=OneTime, Path=UsersGuideText}"/>
+          </Hyperlink>
+        </Label>
+      </ListBoxItem>
+    </ListBox>
+  </DockPanel>
+</UserControl>
